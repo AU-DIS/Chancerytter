@@ -22,15 +22,21 @@ jobs:
      # uses: MarkusJx/install-boost@v2.4.4
       #id
 
+    - name: Install boost for Windows
+      run: |
+        wget "https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.zip" -O boost_1_83_0.zip
+        unzip boost_1_83_0.zip
+        rm boost_1_83_0.zip
+        #sudo apt-get install libboost-all-dev
+      if: runner.os == 'Windows'
+    
     - name: Install boost for Linux
       run: |
-        #sudo apt-get update
         sudo apt-get install libboost-all-dev
       if: runner.os == 'Linux'
       
     - name: Install boost for MacOS
       run: |
-        #brew upgrade
         brew install boost
       if: runner.os == 'macOS'
 
