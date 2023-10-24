@@ -9,13 +9,30 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest] #, windows-latest]
     defaults:
       run:
         shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@v2
+                  
+
+     # - name: Download and install Boost
+     # uses: MarkusJx/install-boost@v2.4.4
+      #id
+
+    - name: Install boost for Linux
+      run: |
+        sudo apt-get update
+        sudo apt-get install libboost-all-dev
+      if: runner.os == 'Linux'
+      
+    - name: Install boost for MacOS
+      run: |
+        brew upgrade
+        brew install boost
+      if: runner.os == 'macOS'
 
     - name: Configure
       run: |
