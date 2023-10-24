@@ -24,6 +24,7 @@ jobs:
 
     - name: Install boost for Windows
       run: |
+        sudo apt-get install wget
         wget "https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.zip" -O boost_1_83_0.zip
         unzip boost_1_83_0.zip
         rm boost_1_83_0.zip
