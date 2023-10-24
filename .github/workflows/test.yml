@@ -24,13 +24,13 @@ jobs:
 
     - name: Install boost for Linux
       run: |
-        sudo apt-get update
+        #sudo apt-get update
         sudo apt-get install libboost-all-dev
       if: runner.os == 'Linux'
       
     - name: Install boost for MacOS
       run: |
-        brew upgrade
+        #brew upgrade
         brew install boost
       if: runner.os == 'macOS'
 
