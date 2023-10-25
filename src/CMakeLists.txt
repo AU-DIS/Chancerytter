@@ -10,10 +10,13 @@ elseif(WIN32)
     message("This is a Windows System")
 endif()
 
-set(SOURCES main.cpp)
+set(SOURCES experiments/experiment_runner.cpp interfaces/experiment_interface.h)
 
-add_library(standard ${SOURCES})
-add_executable(build ${SOURCES})
+add_library(standard)
+##target_include_directories()
+target_sources(standard PUBLIC ${SOURCES})
+target_include_directories(standard PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+add_executable(build main.cpp)
 
 
 

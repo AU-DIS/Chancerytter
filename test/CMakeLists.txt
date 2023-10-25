@@ -11,8 +11,9 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TESTSOURCES test_main.cpp generaltests.h)
-add_executable(unit_tests ${TESTSOURCES})
+set(TESTSOURCES test_main.cpp)
+
+add_executable(unit_tests test_main.cpp)
 
 # Now simply link against gtest or gtest_main as needed. Eg
 #add_executable(example example.cpp)
