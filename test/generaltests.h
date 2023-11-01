@@ -3,7 +3,8 @@
 #include "gtest/gtest.h"
 #include <boost/random.hpp>
 
-TEST(GeneralTest, BoostExists) {
+TEST(GeneralTest, BoostExists)
+{
     boost::mt19937 rng;
     SUCCEED();
 }

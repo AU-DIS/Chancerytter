@@ -10,7 +10,7 @@ elseif(WIN32)
     message("This is a Windows System")
 endif()
 
-set(SOURCES experiments/experiment_runner.cpp interfaces/experiment_interface.h)
+set(SOURCES experiments/experiment_runner.cpp interfaces/experiment.h)
 
 add_library(standard)
 ##target_include_directories()
