@@ -40,3 +40,6 @@ Makefile
 standard
 tests
 build/
+
+#vscode
+.vscode/

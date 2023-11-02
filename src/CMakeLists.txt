@@ -10,7 +10,12 @@ elseif(WIN32)
     message("This is a Windows System")
 endif()
 
-set(SOURCES experiments/experiment_runner.cpp interfaces/experiment.h)
+set(SOURCES 
+experiments/experiment_runner.cpp 
+experiments/settings_fileloader.cpp
+
+
+interfaces/experiment.h csv.h )
 
 add_library(standard)
 ##target_include_directories()
