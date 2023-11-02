@@ -4,6 +4,7 @@
 #include "interfaces/experiment.h"
 #include "experiments/experiment_runner.cpp"
 #include "experiments/settings_fileloader.cpp"
+#include "test_data/test_data.h"
 
 // #include "src/experiments/mock_experiment.cpp"
 //" /src/experiments/mock_experiment.cpp"
@@ -63,9 +64,8 @@ struct SettingsLoaderTest : public testing::Test
 {
     SettingsLoader *loader;
     std::vector<std::string> col_names;
-
     void SetUp() { 
-        loader = new SettingsLoader("test/test_data/test_experiment_settings.csv");
+        loader = new SettingsLoader(std::string(global_testdatapath).append("/test_experiment_settings.csv"));
         col_names = loader->next_row(); 
     };
     void TearDown() { delete loader; };
@@ -73,7 +73,7 @@ struct SettingsLoaderTest : public testing::Test
 
 TEST_F(SettingsLoaderTest, LoadSettingsFile)
 {
-    SettingsLoader("test/test_data/test_experiment_settings.csv");
+    SettingsLoader(std::string(global_testdatapath).append("/test_experiment_settings.csv"));
     SUCCEED();
 }
 
