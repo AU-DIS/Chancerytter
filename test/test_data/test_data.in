@@ -1,0 +1,1 @@
+const char* const global_testdatapath = "@TEST_DATA_DIR@";

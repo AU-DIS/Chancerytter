@@ -17,6 +17,7 @@ else
     exit
 fi
 
+
 ./build/bin/unit_tests
 if [ $? -eq 0 ]; then
     ./build/bin/build    
