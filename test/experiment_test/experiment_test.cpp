@@ -58,7 +58,7 @@ TEST_F(ExperimentRunnerTest, FailOnBadRun)
     ASSERT_NE(0, runner->run());
 }
 
-
+/* ######################## SETTINGS LOADER ###################### */
 
 struct SettingsLoaderTest : public testing::Test
 {
@@ -79,7 +79,7 @@ TEST_F(SettingsLoaderTest, LoadSettingsFile)
 
 TEST_F(SettingsLoaderTest, ReadBanditFromSettingsFile)
 {
-    ASSERT_STREQ(loader->get_bandit().c_str(),"exp3");
+    ASSERT_STREQ(loader->get_bandit()->get_policy_name().c_str(),"exp3");
 }
 
 TEST_F(SettingsLoaderTest, ReadRoundsFromSettingsFile)
@@ -99,9 +99,42 @@ TEST_F(SettingsLoaderTest, ReadFromSettingsFile)
 
 TEST_F(SettingsLoaderTest, ReadBanditTwiceFromSettingsFile)
 {
-    ASSERT_STREQ(loader->get_bandit().c_str(),"exp3");
+    ASSERT_STREQ(loader->get_bandit()->get_policy_name().c_str(),"exp3");
     loader->next_row();
-    ASSERT_STREQ(loader->get_bandit().c_str(),"qblm");
+    ASSERT_STREQ(loader->get_bandit()->get_policy_name().c_str(),"qbl");
+}
+
+
+/* ######################## CONDUCTOR ###################### */
+
+#include "interfaces/conductor.h"
+#include "conductors/single_choice_conductor.cpp"
+
+struct ConductorTest : public testing::Test
+{
+    SettingsLoader *loader;
+    std::vector<std::string> col_names;
+    void SetUp() { 
+        loader = new SettingsLoader(std::string(global_testdatapath).append("/test_experiment_settings.csv"));
+        col_names = loader->next_row(); 
+    };
+    void TearDown() { delete loader; };
+};
+
+TEST_F(ConductorTest, CreateSingleChoiceConductorTest) {
+    SingleChoiceConductor();
+    SUCCEED();
+}
+
+TEST_F(ConductorTest, CreateSingleChoiceConductorWithLoaderTest) {
+    SingleChoiceConductor(loader);
+    SUCCEED();
+}
+
+TEST_F(ConductorTest, LoadConductorSettingsManuallyFromLoaderTest) {
+    std::unique_ptr<Conductor> conductor = std::make_unique<SingleChoiceConductor>();
+    conductor->load_settings_from_loader(*loader);
+    SUCCEED();
 }
 
 

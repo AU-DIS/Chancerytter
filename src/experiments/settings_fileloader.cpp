@@ -2,6 +2,9 @@
 #define __REPS_CHANCERYTTER_SRC_EXPERIMENTS_SETTINGS_FILELOADER_CPP_
 
 #include "../csv.h"
+#include "../interfaces/single_policy.h"
+#include "../singlepolicies/exp3.cpp"
+#include "../singlepolicies/qbl.cpp"
 
 class SettingsLoader {
     
@@ -17,8 +20,16 @@ class SettingsLoader {
         return current_row.get_col_names();
     }
 
-    std::string get_bandit() {
-        return current_row["bandit"].get();
+    std::unique_ptr<SinglePolicy> get_bandit() {
+        switch(spn::s_single_policy_names[current_row["bandit"].get()])
+        {
+        case spn::exp3:
+            return std::make_unique<Exp3>();
+        case spn::qbl:
+            return std::make_unique<QBL>();
+        default:
+            throw std::runtime_error("Specified banditname in settingsfile is not valid");
+        }
     }
 
     int get_rounds() {

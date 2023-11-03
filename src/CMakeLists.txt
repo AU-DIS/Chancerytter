@@ -11,11 +11,20 @@ elseif(WIN32)
 endif()
 
 set(SOURCES 
+interfaces/experiment.h 
+interfaces/conductor.h 
+interfaces/single_policy.h
+
 experiments/experiment_runner.cpp 
 experiments/settings_fileloader.cpp
 
+singlepolicies/exp3.cpp
+singlepolicies/qbl.cpp
 
-interfaces/experiment.h csv.h )
+conductors/single_choice_conductor.cpp
+
+csv.h 
+)
 
 add_library(standard)
 ##target_include_directories()
