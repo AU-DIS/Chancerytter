@@ -12,6 +12,7 @@
 static void add_policies() {
     spn::single_policy_map.insert({std::string("exp3"), &spn::createSinglePolicy<Exp3>});
     spn::single_policy_map.insert({std::string("qbl"), &spn::createSinglePolicy<QBL>});
+}
 
 class SettingsLoader {
 
