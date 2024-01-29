@@ -3,21 +3,7 @@
 
 #include <string>
 #include <map>
-
-namespace spn {
-enum Single_Policy_Names 
-{
-    exp3,
-    qbl,
-};
-
-
-static std::map<std::string, spn::Single_Policy_Names> s_single_policy_names = {
-    {std::string("exp3"), spn::exp3},
-    {std::string("qbl"), spn::qbl}
-};
-}
-
+#include <memory>
 
 
 
@@ -29,5 +15,16 @@ public:
     virtual void give_reward(int, double) = 0;  
     virtual std::string get_policy_name() = 0;
 };
+
+namespace spn {
+
+template<typename T> std::unique_ptr<SinglePolicy> createSinglePolicy() {return std::make_unique<T>();}
+
+typedef std::map<std::string, std::unique_ptr<SinglePolicy>(*)()> policy_map;
+
+static policy_map single_policy_map = {};
+
+}
+
 
 #endif // __REPS_CHANCERYTTER_SRC_INTERFACES_SINGLE_POLICY_H_
