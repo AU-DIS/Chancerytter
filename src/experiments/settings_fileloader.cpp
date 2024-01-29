@@ -4,8 +4,6 @@
 #include <map>
 #include "../csv.h"
 #include "../interfaces/single_policy.h"
-//#include "../singlepolicies/exp3.hpp"
-//#include "../singlepolicies/qbl.cpp"
 
 #include "../singlepolicies/exp3.cpp"
 #include "../singlepolicies/qbl.cpp"
@@ -14,7 +12,6 @@
 static void add_policies() {
     spn::single_policy_map.insert({std::string("exp3"), &spn::createSinglePolicy<Exp3>});
     spn::single_policy_map.insert({std::string("qbl"), &spn::createSinglePolicy<QBL>});
-}
 
 class SettingsLoader {
 
@@ -37,6 +34,7 @@ class SettingsLoader {
             throw std::runtime_error("Specified banditname in settingsfile is not valid");
         }
         return it->second();
+
     }
 
     int get_rounds() {

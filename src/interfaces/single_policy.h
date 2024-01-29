@@ -7,6 +7,7 @@
 
 
 
+
 class SinglePolicy
 {
 public:
@@ -25,6 +26,5 @@ typedef std::map<std::string, std::unique_ptr<SinglePolicy>(*)()> policy_map;
 static policy_map single_policy_map = {};
 
 }
-
 
 #endif // __REPS_CHANCERYTTER_SRC_INTERFACES_SINGLE_POLICY_H_
