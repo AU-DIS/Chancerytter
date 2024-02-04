@@ -14,6 +14,9 @@ set(SOURCES
 interfaces/experiment.h 
 interfaces/conductor.h 
 interfaces/single_policy.h
+interfaces/environment.h
+interfaces/arm.h
+interfaces/expert.h
 
 experiments/experiment_runner.cpp 
 experiments/settings_fileloader.cpp
@@ -23,6 +26,11 @@ singlepolicies/qbl.cpp
 
 conductors/single_choice_conductor.cpp
 
+arms/mod2.cpp
+
+experts/mod_expert.cpp
+
+environments/mod2_fixed.cpp
 csv.h 
 )
 

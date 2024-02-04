@@ -4,9 +4,12 @@
 #include <map>
 #include "../csv.h"
 #include "../interfaces/single_policy.h"
+#include "../interfaces/environment.h"
 
 #include "../singlepolicies/exp3.cpp"
 #include "../singlepolicies/qbl.cpp"
+
+#include "../environments/mod2_fixed.cpp"
 
 //TODO: Move this function to somewhere more general
 static void add_policies() {
@@ -36,6 +39,10 @@ class SettingsLoader {
         }
         return it->second();
 
+    }
+
+    std::unique_ptr<Environment> get_environment() {
+        return std::make_unique<Mod2FixedEnvironment>(current_row["nbarms"].get<int>(),current_row["nbexperts"].get<int>());
     }
 
     int get_rounds() {

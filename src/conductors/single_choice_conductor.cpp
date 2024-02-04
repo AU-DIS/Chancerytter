@@ -3,7 +3,9 @@
 
 #include "../interfaces/conductor.h"
 #include "../interfaces/single_policy.h"
+#include "../interfaces/environment.h"
 #include "../experiments/settings_fileloader.cpp"
+
 
 
 class SingleChoiceConductor: public Conductor {
@@ -12,6 +14,7 @@ class SingleChoiceConductor: public Conductor {
     int max_rounds = 0;
     int nbarms = 0;
     std::unique_ptr<SinglePolicy> policy;
+    std::unique_ptr<Environment> environment;
     public:
     SingleChoiceConductor() {
 
@@ -26,7 +29,7 @@ class SingleChoiceConductor: public Conductor {
         max_rounds = loader.get_rounds();
         nbarms = loader.get_nbarms();
         policy = std::move(loader.get_bandit());
-        
+        environment = std::move(loader.get_environment());     
     }
 
     void set_policy(const std::string policy_name, const std::vector<double> params) {
